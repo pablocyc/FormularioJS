@@ -40,10 +40,15 @@ function agregarTweet (e) {
   li.appendChild(botonBorrar)
   // añade el tweet a la lista
   listaTweets.appendChild(li)
+
+  // Añadir a Local Storage
+  agregarTweetLocalStorage(tweet)
+
   
-  console.log(tweet)
 }
 
+
+// Elimina el Tweet del DOM
 function borrarTweet (e) {
   e.preventDefault()
   if (e.target.className === 'borrar-tweet') {
@@ -51,3 +56,30 @@ function borrarTweet (e) {
     alert('Tweet Eliminado')
   }
 }
+
+// Agrega Tweet a Local Storage
+function agregarTweetLocalStorage (tweet) {
+  let tweets
+  tweets = obtenerTweetsLocalStorage()
+
+  // añadir el nuevo tweet
+  tweets.push(tweet)
+
+  // Convertir de string a arreglo para localStorage
+  localStorage.setItem('tweets', JSON.stringify(tweets))
+  
+}
+
+
+function obtenerTweetsLocalStorage () {
+  let tweets
+
+  // Revisamos los valores del local storage
+  if (localStorage.getItem('tweets') === null) {
+    tweets = []
+  } else {
+    tweets = JSON.parse(localStorage.getItem('tweets'))
+  }
+  return tweets
+}
+
