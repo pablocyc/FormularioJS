@@ -1,7 +1,7 @@
 // Variables
 
 const listaTweets = document.getElementById('lista-tweets')
-
+let contTweets
 
 
 // Event Listeners
@@ -19,11 +19,7 @@ function eventListeners() {
 }
 
 
-
-
 // Funciones
-
-
 
 //Añadir tweets del formulario
 function agregarTweet (e) {
@@ -31,12 +27,16 @@ function agregarTweet (e) {
   console.log('Formulario enviado')
   // leer el valor del textArea
   const tweet = document.getElementById('tweet').value
-  
-  // Crear lista en el DOM
-  crearLista(tweet)
-  
-  // Añadir a Local Storage
-  agregarTweetLocalStorage(tweet)
+  if (tweet != '') {
+    // Crear lista en el DOM
+    crearLista(tweet)
+    
+    // Añadir a Local Storage
+    agregarTweetLocalStorage(tweet)
+  }
+
+  // Borrar textArea
+  document.getElementById('tweet').value = ""
 }
 
 
@@ -113,6 +113,7 @@ function borrarTweetLocalStorage (tweet) {
   tweets = obtenerTweetsLocalStorage()
 
   tweets.forEach( function (tweet, index) {
+    tweet = tweet.replace('\n', '')
     if (tweetBorrar === tweet) {
       tweets.splice(index, 1)
     }
