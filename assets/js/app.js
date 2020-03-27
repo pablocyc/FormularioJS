@@ -113,7 +113,8 @@ function borrarTweetLocalStorage (tweet) {
   tweets = obtenerTweetsLocalStorage()
 
   tweets.forEach( function (tweet, index) {
-    tweet = tweet.replace('\n', '')
+    tweet = tweet.replace(/\n/gi, '')
+    console.log(tweet)
     if (tweetBorrar === tweet) {
       tweets.splice(index, 1)
     }
