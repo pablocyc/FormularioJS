@@ -113,7 +113,7 @@ function borrarTweetLocalStorage (tweet) {
   tweets = obtenerTweetsLocalStorage()
 
   tweets.forEach( function (tweet, index) {
-    tweet = tweet.replace(/\n/gi, '')
+    tweet = tweet.replace(/\n/gi, '') // borrando todos los saltos de linea
     console.log(tweet)
     if (tweetBorrar === tweet) {
       tweets.splice(index, 1)
